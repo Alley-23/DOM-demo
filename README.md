@@ -1,7 +1,7 @@
 # Small example accumulation
 
-## seach
+## 01_seach
 
 ### 效果图
-![image](https://github.com/Alley-23/React-Demo/blob/daily/0.0.1/todo-demo/images/liu.png)
+![image](https://github.com/Alley-23/DOM-demo/blob/daily/0.0.1/seach/seach.gif)
 
