@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Seach</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style type="text/css">
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            img{
+                border:0;
+            }
+            ol, ul ,li{list-style: none;}
+
+            .seach-wrap{
+                width: 180px;
+                height: 40px;
+                background-color: #ddd;
+                margin: 0 auto;
+                margin: 40px;
+                border-radius: 20px;
+                position: relative;
+                float: left;
+                -webkit-transition: all 1s ease 0s;
+                -moz-transition: all 1s ease 0s;
+                    -ms-transition: all 1s ease 0s;
+                    -o-transition: all 1s ease 0s;
+                        transition: all 1s ease 0s;
+            }
+            .seach-wrap-active{
+                width: 240px;
+            }
+            .seach-wrap .seach-input{
+                width: 100%;
+                height: 40px;
+                background-color: #ddd;
+                border-radius: 20px;
+                border: none;
+                padding-left: 20px;
+                padding-right: 40px;
+                box-sizing: border-box;
+                font-size: 16px;
+                line-height: 40px;
+                color: #002131;
+            }
+            .seach-wrap .seach-input::-moz-placeholder{
+                color: #bfbfbf;
+                font-size: 16px;
+                line-height: 40px;
+            }
+            .seach-wrap .seach-input::-webkit-input-placeholder{
+                 color: #bfbfbf;
+                font-size: 16px;
+                line-height: 40px;
+            }
+            .seach-wrap .seach-input:-ms-input-placeholder{
+                color: #bfbfbf;
+                font-size: 16px;
+                line-height: 40px;
+            }
+            .seach-wrap .seach-input:focus{
+                outline: none;
+            }
+            .seach-wrap .seach-icon{
+                width: 32px;
+                height: 32px;
+                border-radius: 100%;
+                background-image: url('seach-icon-02.png');
+                background-size: 24px auto;
+                background-position: 4px 3px;
+                background-repeat: no-repeat;
+                background-color: #ddd;
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                cursor: pointer;
+                -webkit-transition: all 0.5s ease 0s;
+                -moz-transition: all 0.5s ease 0s;
+                    -ms-transition: all 0.5s ease 0s;
+                    -o-transition: all 0.5s ease 0s;
+                        transition: all 0.5s ease 0s;
+            }
+            .seach-icon-active{
+                background-color: #bfbfbf !important;
+                background-image: url('seach-icon-01.png') !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="seach-wrap" id="seach-wrap">
+            <input id="seach-input" class="seach-input" type="text" placeholder="seach" />
+            <span id="seach-icon" class="seach-icon"></span>
+        </div>
+
+        <script type="text/javascript">
+            let seachWrap = document.getElementById("seach-wrap");
+            let seachInput = document.getElementById("seach-input");
+            let seachIcon = document.getElementById("seach-icon");
+            seachInput.onclick = function() {
+                seachWrap.className = "seach-wrap seach-wrap-active";
+                seachIcon.className = "seach-icon seach-icon-active"
+            }
+            seachInput.onblur = function() {
+                seachWrap.className = "seach-wrap";
+                seachIcon.className = "seach-icon"
+            }
+        </script>
+    </body>
+</html>
