@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>css3</title>
+    <link rel="stylesheet" href="">
+    <style type="text/css">
+        .warp{
+            overflow: hidden;
+            margin: 0 auto;
+            margin-top: 50px;
+            padding: 20px;
+        }
+        @media screen and (min-width: 800px) {
+            .warp{
+                width: 1000px;
+                background-color: #eee;
+            }
+        }
+        @media screen and (max-width: 800px) and (min-width: 520px) {
+            .warp{
+                width: 800px;
+                background-color: #ccc;
+            }
+        }
+        @media screen and (max-width: 520px) {
+            .warp{
+                width: 520px;
+                background-color: #ddd;
+            }
+        }
+        .warp div{
+            float: left;
+            width: 200px;
+            height: 200px;
+            background: #2196f3;
+            margin: 0 auto;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            color: #fff;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .box1{
+            border-radius: 100px;
+            border-top-right-radius: 50px;
+            border-top-left-radius: 80px;
+            border-bottom-left-radius: 30px;
+        }
+        .box2{
+            /* box-shadow: 10px 10px 5px #888888; */
+            box-shadow: 0px 4px 7px #a4d2f7;
+        }
+        .box3,.box4,.box5,.box6{
+            position: relative;
+
+        }
+        .box3:hover{
+            -webkit-transform: translate(50px, 0px);
+               -moz-transform: translate(50px, 0px);
+                -ms-transform: translate(50px, 0px);
+                 -o-transform: translate(50px, 0px);
+                    transform: translate(50px, 0px);
+        }
+        .box4:hover{
+            -webkit-transform: rotate(30deg);
+               -moz-transform: rotate(30deg);
+                -ms-transform: rotate(30deg);
+                 -o-transform: rotate(30deg);
+                    transform: rotate(30deg);
+        }
+        .box5:hover{
+            -webkit-transform: scale(1.2, 1.5);
+               -moz-transform: scale(1.2, 1.5);
+                -ms-transform: scale(1.2, 1.5);
+                 -o-transform: scale(1.2, 1.5);
+                    transform: scale(1.2, 1.5);
+                    box-shadow: 0px 4px 7px #a4d2f7;
+        }
+        .box6{
+            -webkit-transition: all 2s ease 0s;
+               -moz-transition: all 2s ease 0s;
+                -ms-transition: all 2s ease 0s;
+                 -o-transition: all 2s ease 0s;
+                    transition: all 2s ease 0s;
+        }
+        .box6:hover{
+            width: 500px;
+        }
+        .box7{
+            position: relative;
+            top: 0;
+            left: 0;
+
+        }
+        .box7:hover{
+            animation: an 2s;
+        }
+        @keyframes an{
+            from{ background-color: skyblue; }
+            to{ background-color: yellowgreen; }
+        }
+        .box8{
+            position: relative;
+            top: 0;
+            left: 0;
+
+        }
+        .box8:hover{
+            animation: an2 5s;
+        }
+        @keyframes an2{
+            0%   {background: red; left:0px; top:0px;}
+            25%  {background: yellow; left:200px; top:0px;}
+            50%  {background: blue; left:200px; top:200px;}
+            75%  {background: green; left:0px; top:200px;}
+            100% {background: red; left:0px; top:0px;}
+        }
+    </style>
+</head>
+<body>
+<div class="warp">
+    <div class="box1">1-圆角</div>
+    <div class="box2">2-阴影</div>
+    <div class="box3">3-移动</div>
+    <div class="box4">4-旋转</div>
+    <div class="box5">5-缩放</div>
+    <div class="box6">6-过渡</div>
+    <div class="box7">7-动画</div>
+    <div class="box8">7-动画2</div>
+</div>
+
+</body>
+</html>

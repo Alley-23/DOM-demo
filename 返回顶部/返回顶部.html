@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>demo</title>
+<style>
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+address,cite,dfn,em,var{font-style:normal;}
+code,kbd,pre,samp{font-family:courier new,courier,monospace;}
+ul,ol{list-style:none;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+legend{color:#000;}
+fieldset,img{border:0;}
+button,input,select,textarea{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+.clear{
+    clear: both;
+    float: none;
+    height: 0;
+    overflow: hidden;
+}
+.bg{
+    width: 1000px;
+    height: 3000px;
+    margin: 0 auto;
+    background-image:
+    linear-gradient(#333, #999);
+}
+#topBtn{
+    width: 50px;
+    height: 50px;
+    background:#5490F5;
+    color: #fff;
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    text-align:
+    center;
+    font-family: "Microsoft Yahei",tahoma,arial;
+    font-size: 14px;
+    cursor: pointer;
+    margin-left: 520px;
+    display: none;
+}
+#topBtn span{
+    display: block;
+    padding: 5px;
+}
+</style>
+</head>
+    <body>
+        <div class="bg"></div>
+        <div id="topBtn"><span>返回顶部</span></div>
+        <script type="text/javascript">
+            //在页面加载完后立即执行多个函数方案
+            function addloadEvent(func){
+                var oldonload=window.onload;
+                if(typeof window.onload != "function"){
+                    window.onload = func;
+                } else{
+                    window.onload = function(){
+                        if(oldonload){
+                            oldonload();
+                        }
+                        func();
+                    }
+                }
+            }
+            //在页面加载完后立即执行多个函数方案结束
+            addloadEvent(goTop);
+            function goTop(){
+                var topBtn = document.getElementById("topBtn"); //获得元素
+                var timer = null;  //定时器
+                var isTop = true; //是否停止定时器
+                //滚动触发
+                window.onscroll=function(){
+                    //获取滚动条高度
+                    var ostop=document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+                    //获取窗口可视区域高度
+                    var ch=document.documentElement.clientHeight||document.body.clientHeight;
+                    //如果页面超过一屏高度按钮显示，否则隐藏
+                    if(ostop >= ch){
+                        topBtn.style.display="block";
+                    }else{
+                        topBtn.style.display="none";
+                    }
+                    if(!isTop){
+                        clearInterval(timer);
+                    }
+
+                    isTop = false;
+                }
+                //点击触发
+                topBtn.onclick = function(){
+                    //创建定时器
+                    timer = setInterval(function(){
+                        //获取滚动条高度
+                        var ostop=document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+                        //每次上升高度的20%
+                        var speed=Math.ceil(ostop/5);
+                        //每次上升当前高度的80%
+                        document.documentElement.scrollTop=document.body.scrollTop=ostop-speed;
+                        //如果高度为0，清除定时器
+                        if(ostop == 0){
+                            clearInterval(timer);
+                        }
+                        isTop = true;
+                    },30);
+                }
+            }
+        </script>
+    </body>
+</html>

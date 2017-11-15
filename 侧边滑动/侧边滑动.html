@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            border:0;
+        }
+        ol, ul ,li{list-style: none;}      
+        .btn{
+            width: 100px;
+            height: 40px;
+            background-color: #0099ff;
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+            cursor: pointer;
+        }  
+        .btn:hover{
+            background-color: #2facff;
+        }
+        .sidebar{
+            position: fixed;
+            top: 0;
+            right: -410px;
+            width: 400px;
+            height: 100%;
+            z-index: 999;
+            background-color: #fff;
+            box-shadow: -4px 0 10px #cacaca;
+            -webkit-transition: all 1s ease 0s;
+               -moz-transition: all 1s ease 0s;
+                -ms-transition: all 1s ease 0s;
+                 -o-transition: all 1s ease 0s;
+                    transition: all 1s ease 0s;
+        }
+        .sidebar .close{
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 24px;
+            color: #666;
+            transform: rotate(45deg);
+        }
+        .show{
+            right: 0;
+        }
+        .sidebar .top{
+            width: 100%;
+            height: 80px;
+            padding: 20px;
+            box-sizing: border-box;
+            border-bottom: 1px solid #eee;
+        }
+        .sidebar .top span{
+            float: left;
+            line-height: 40px;
+        }
+        .sidebar .top span:nth-child(2){
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn" id="btn">出来</div>
+    <div class="sidebar" id="sidebar">
+        <div class="top">
+            <span>我是标题</span>
+            <span class="close" id="close">+</span>
+        </div>
+        
+    </div>
+
+    <script>
+        var btn = document.getElementById("btn");
+        var sidebar = document.getElementById("sidebar");
+        var close = document.getElementById("close");
+
+        btn.onclick = function() {
+            sidebar.className = "sidebar show";
+        }
+        close.onclick = function() {
+            sidebar.className = "sidebar";
+        }
+    </script>
+</body>
+</html>

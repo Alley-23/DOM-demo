@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style>
+        *{
+              margin: 0;
+              padding: 0;
+          }
+        body{
+            height: 2000px;
+            background-image: linear-gradient(-180deg, #15f09d 0%, #25A0FF 50%, #fca72b 100%);
+        }
+        #wrap{
+            background-color: #fff;
+            width: 100%;
+            height: 100px;
+            margin-top: 100px;
+        }
+        #wrap[data-fixed="fixed"]{
+            position: fixed;
+            top:0;
+            left: 0;
+            margin: 0;
+        }
+    </style>
+    <script type="text/javascript" src="adsorbTop.js"></script>
+</head>
+<body>
+    <body>
+        <div id="wrap"></div>
+    </body>
+
+    <script type="text/javascript">
+        //常规写法
+        // var obj = document.getElementById("wrap");
+        // var ot = obj.offsetTop;
+        // document.onscroll = function() {
+        //    var st = document.body.scrollTop || document.documentElement.scrollTop;
+        //    obj.setAttribute('data-fixed', st >= ot ? 'fixed' : "");
+        // }
+
+
+        //封装
+        // function adsorbTop(obj, att) {
+        //     var ot = obj.offsetTop;
+        //     document.onscroll = function() {
+        //         var st = document.body.scrollTop || document.documentElement.scrollTop;
+        //         obj.setAttribute(att, st >= ot && "fixed")
+        //     }
+        // }
+
+        var wrap = document.getElementById("wrap");
+        adsorbTop(wrap, "data-fixed");
+    </script>
+</body>
+</html>

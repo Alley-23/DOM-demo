@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            border:0;
+        }
+        ol, ul ,li{list-style: none;}
+        .header{
+            width: 100%;
+            height: 320px;
+            background-color: #ccc;
+            background-image: url('images/11.png');
+            background-size: 100% auto;
+        }
+        .container{
+            width: 100%;
+            background-color: #e6e6e6;
+            padding-top: 30px;
+            padding-bottom: 30px;
+        }
+        .container .list{
+            width: 1200px;
+            height: 400px;
+            margin: 0 auto;
+            box-sizing: border-box;
+        }
+        .container .list .item{
+            position: relative;
+            top: 0;
+            z-index:9;
+            float: left;
+            width: 25%;
+            height: 100%;
+            background-color: #fff;
+            background-image: url('images/11.png');
+            border: 0px solid #2196f3;
+            padding: 20px;
+            overflow: hidden;
+            text-align: center;
+            box-sizing: border-box;
+            -webkit-transition: all .3s ease 0s;
+               -moz-transition: all .3s ease 0s;
+                -ms-transition: all .3s ease 0s;
+                 -o-transition: all .3s ease 0s;
+                    transition: all .3s ease 0s;
+        }
+        .container .list .item:nth-child(2n){
+            background-image: url('images/12.png');
+        }
+        .container .list .item:hover{
+            top: -5px;
+            z-index: 10;
+            /* border: 1px solid #2196f3; */
+            box-sizing: border-box;
+            box-shadow: 0px 5px 12px rgb(173, 219, 255);
+            -webkit-transform: scale(1.1, 1.05);
+               -moz-transform: scale(1.1, 1.05);
+                -ms-transform: scale(1.1, 1.05);
+                 -o-transform: scale(1.1, 1.05);
+                    transform: scale(1.1, 1.05);
+        }
+        .container .list .item .mask{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.0);
+            position: absolute;
+            top: 400px;
+            left: 0;
+            -webkit-transition: all .3s ease 0s;
+               -moz-transition: all .3s ease 0s;
+                -ms-transition: all .3s ease 0s;
+                 -o-transition: all .3s ease 0s;
+                    transition: all .3s ease 0s;
+        }
+        .container .list .item:hover .mask{
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .container .list .item .title, .container .list .item .desc, .container .list .item .btn{
+            position: relative;
+            opacity: 0;
+            -webkit-transition: all .5s ease 0s;
+               -moz-transition: all .5s ease 0s;
+                -ms-transition: all .5s ease 0s;
+                 -o-transition: all .5s ease 0s;
+                    transition: all .5s ease 0s;
+        }
+        .container .list .item .title{
+            bottom: -400px;
+            font-size: 20px;
+            line-height: 48px;
+            color: #fff;
+        }
+        .container .list .item:hover .title{
+            opacity: 1;
+            bottom: 0;
+        }
+        .container .list .item .desc{
+            bottom: -300px;
+            font-size: 14px;
+            line-height: 24px;
+            color: #fff;
+            padding-top: 40px;
+            height: 140px;
+            overflow: hidden;
+            isplay: -webkit-box;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 6;
+            -webkit-box-orient: vertical;
+        }
+        .container .list .item:hover .desc{
+            opacity: 1;
+            bottom: 0;
+        }
+        .container .list .item .btn{
+            position: relative;
+            left: 50%;
+            margin-left: -40px;
+            bottom: -215px;
+            display: block;
+            text-decoration: none;
+            width: 80px;
+            height: 30px;
+            border-radius: 4px;
+            text-align: center;
+            line-height: 30px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #2196f3;
+            margin-top: 60px;
+
+        }
+        .container .list .item:hover .btn{
+            opacity: 1;
+            bottom: 0;
+        }
+
+
+        .picShow{
+            width: 100%;
+            height: 400px;
+            padding: 30px 0;
+        }
+        .picShow .list{
+            width: 1200px;
+            height: 400px;
+            margin: 0 auto;
+        }
+        .picShow .list .item{
+            height: 200px;
+            width: 450px;
+            float: left;
+                    overflow: hidden;
+                    position: relative;
+        }
+        .picShow .list .item .mask{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            -webkit-transition: all .5s ease 0s;
+               -moz-transition: all .5s ease 0s;
+                -ms-transition: all .5s ease 0s;
+                 -o-transition: all .5s ease 0s;
+                    transition: all .5s ease 0s;
+        }
+        .picShow .list .item img{
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            -webkit-transition: all .5s ease 0s;
+               -moz-transition: all .5s ease 0s;
+                -ms-transition: all .5s ease 0s;
+                 -o-transition: all .5s ease 0s;
+                    transition: all .5s ease 0s;
+        }
+        .picShow .list .item:nth-child(1) {
+            height: 400px;
+            width: 300px;
+        }
+        .picShow .list .item:hover .mask{
+            background-color: rgba(0, 0, 0, 0);
+        }
+
+        .picShow .list .item:hover img{
+            -webkit-transform: scale(1.2);
+               -moz-transform: scale(1.2);
+                -ms-transform: scale(1.2);
+                 -o-transform: scale(1.2);
+                    transform: scale(1.2);
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="header">
+
+    </div>
+    <div class="container">
+        <ul class="list">
+            <li class="item">
+                <div class="mask"></div>
+                <div class="title">标题</div>
+                <div class="desc">
+                    因为爱情 简单的生长
+                    依然随时可以为你疯狂
+                    因为爱情 怎么会有沧桑
+                    所以我们还是年轻的模样
+                    因为爱情 在那个地方
+                    依然还有人在那里游荡人来人往
+                    再唱不出那样的歌曲
+                    听到都会红着脸躲避
+                    虽然会经常忘了我依然爱着你
+                    因为爱情 不会轻易悲伤
+                    所以一切都是幸福的模样
+                    因为爱情 简单的生长
+                    依然随时可以为你疯狂
+                    因为爱情 怎么会有沧桑
+                    所以我们还是年轻的模样
+                </div>
+                <a class="btn" href="###">查看</a>
+            </li>
+            <li class="item">
+                <div class="mask"></div>
+                <div class="title">标题</div>
+                <div class="desc">
+                    因为爱情 简单的生长
+                    依然随时可以为你疯狂
+                    因为爱情 怎么会有沧桑
+                    所以我们还是年轻的模样
+                    因为爱情 在那个地方
+                    依然还有人在那里游荡人来人往
+                    再唱不出那样的歌曲
+                    听到都会红着脸躲避
+                    虽然会经常忘了我依然爱着你
+                    因为爱情 不会轻易悲伤
+                    所以一切都是幸福的模样
+                    因为爱情 简单的生长
+                    依然随时可以为你疯狂
+                    因为爱情 怎么会有沧桑
+                    所以我们还是年轻的模样
+                </div>
+                <a class="btn" href="###">查看</a>
+            </li>
+            <li class="item">
+                <div class="mask"></div>
+                <div class="title">标题</div>
+                <div class="desc">
+                    因为爱情 简单的生长
+                    依然随时可以为你疯狂
+                    因为爱情 怎么会有沧桑
+                    所以我们还是年轻的模样
+                    因为爱情 在那个地方
+                    依然还有人在那里游荡人来人往
+                    再唱不出那样的歌曲
+                    听到都会红着脸躲避
+                    虽然会经常忘了我依然爱着你
+                    因为爱情 不会轻易悲伤
+                    所以一切都是幸福的模样
+                    因为爱情 简单的生长
+                    依然随时可以为你疯狂
+                    因为爱情 怎么会有沧桑
+                    所以我们还是年轻的模样
+                </div>
+                <a class="btn" href="###">查看</a>
+            </li>
+            <li class="item">
+                <div class="mask"></div>
+                <div class="title">标题</div>
+                <div class="desc">
+                    因为爱情 简单的生长
+                    依然随时可以为你疯狂
+                    因为爱情 怎么会有沧桑
+                    所以我们还是年轻的模样
+                    因为爱情 在那个地方
+                    依然还有人在那里游荡人来人往
+                    再唱不出那样的歌曲
+                    听到都会红着脸躲避
+                    虽然会经常忘了我依然爱着你
+                    因为爱情 不会轻易悲伤
+                    所以一切都是幸福的模样
+                    因为爱情 简单的生长
+                    依然随时可以为你疯狂
+                    因为爱情 怎么会有沧桑
+                    所以我们还是年轻的模样
+                </div>
+                <a class="btn" href="###">查看</a>
+            </li>
+        </ul>
+    </div>
+    <div class="picShow">
+        <div class="list">
+            <div class="item">
+                <div class="mask"></div>
+                <img src="images/12.png" alt="">
+            </div>
+            <div class="item">
+                <div class="mask"></div>
+                <img src="images/1.png" alt="">
+            </div>
+            <div class="item">
+                <div class="mask"></div>
+                <img src="images/2.png" alt="">
+            </div>
+            <div class="item">
+                <div class="mask"></div>
+                <img src="images/3.png" alt="">
+            </div>
+            <div class="item">
+                <div class="mask"></div>
+                <img src="images/4.png" alt="">
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
