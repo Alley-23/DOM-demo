@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style type="text/css">
+        .custom-border{
+            width:200px;
+            margin:10px auto;
+            height:100px;
+            border:1px solid #333;
+            background-color:#eee;
+            padding:10px;
+        }
+        .scale-border{
+            margin:10px auto;
+            height:100px;
+            position:relative;
+            padding:10px;
+            width: 200px;
+        }
+        .border{
+            -webkit-transform:scale(0.5);
+            transform:scale(0.5);
+            position:absolute;
+            border:1px solid #333;
+            top:-50%;
+            right:-50%;
+            bottom:-50%;
+            left:-50%;
+            border-radius: 10px;
+            background-color:#eee;
+        }
+        .content{
+            position:relative;
+            z-index:2;
+        }
+        .qq{
+            width: 200px;
+            height:;
+        }
+        .aa{
+            width: 200px;
+            height: 50px;
+            background-color: #eee;
+            position: relative;
+            border-radius: 8px;
+        }
+        .aa::after{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            border-radius: 16px;
+            border: 1px solid red;
+            box-sizing: border-box;
+            -webkit-transform-origin: 0 0;
+           -moz-transform-origin: 0 0;
+           -ms-transform-origin: 0 0;
+           -o-transform-origin: 0 0;
+           transform-origin: 0 0;
+           -webkit-transform: scale(0.5, 0.5);
+           -ms-transform: scale(0.5, 0.5);
+           -o-transform: scale(0.5, 0.5);
+           transform: scale(0.5, 0.5);
+           -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+           box-sizing: border-box;
+        }
+        .line-1{
+            width: 200px;
+            height: 50px;
+            border-bottom: 4px solid #000;
+        }
+        .line1{
+            position: relative;
+            border: none;
+        }
+        .line1:after{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: #000;
+            width: 100%;
+            height: 4px;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+        }
+        .line-2{
+            width: 200px;
+            height: 50px;
+            border: 4px solid #000;
+        }
+        .line2{
+            position: relative;
+            width: 200px;
+            height: 50px;
+        }
+        .line2:after{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 4px solid #000;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            width: 200%;
+            height: 200%;
+            -webkit-transform: scale(0.5);
+            transform: scale(0.5);
+            -webkit-transform-origin: left top;
+            transform-origin: left top;
+        }
+        .box{
+            width: 500px;
+            margin: 0 auto;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div class="custom-border border-color">边框宽度1px</div>
+    <div class="scale-border">
+        <div class="content">边框宽度0.5px</div>
+        <div class="border border-color"></div>
+    </div>
+
+    <div class="qq" style="position:absolute;border-bottom: 1px #cecece solid;
+     transform: scaleY(0.5);top:0;height: 0px;width:100%;"></div>
+
+    <div class="aa">
+
+    </div> -->
+    <div class="box">
+        <span class="line-1">
+            单条border样式设置
+        </span>
+        <span class="line1">
+            单条border样式设置
+        </span>
+        <hr/>
+        <span class="line-2">
+            四条boder样式设置
+        </span>
+        <span class="line2">
+            四条boder样式设置
+        </span>
+    </div>
+
+</body>
+</html>
