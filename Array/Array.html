@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Array</title>
+    <link rel="stylesheet" href="">
+    <style type="text/css">
+        .wrap{
+            width: 680px;
+            background-color: #f2f2f2;
+            margin: 0 auto;
+            box-shadow: 2px 3px 10px 3px #e3e3e3;
+        }
+        .wrap h1{
+            width: 100%;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        .wrap h3{
+            display: inline-block;
+            font-size: 16px;
+            text-align: left;
+            border-bottom: 2px solid #ff774d;
+            padding-bottom: 5px;
+            padding-left: 20px;
+            padding-right: 10px;
+        }
+        .wrap h4{
+            display: inline-block;
+            font-size: 16px;
+            text-align: left;
+            border: 1px solid #007cdf;
+            padding: 5px 10px;
+            color: #007cdf;
+            cursor: pointer;
+            position: relative;
+        }
+        .wrap h4:hover{
+            background-color: #fff;
+        }
+        .wrap h4:active{
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <h1>Array整理</h1>
+
+    <code>
+        <pre>
+<h3>将数组转为字符串</h3>
+    <h4>join</h4>
+    console.log(arr.join(","));         //1,2,3,4
+    <h4>toString</h4>
+    console.log(arr.toString());        //1,2,3,4
+    <h4>toLocaleString</h4>
+    console.log(arr.toLocaleString());  //1,2,3,4
+
+<h3>栈方法</h3>
+    <h4>push()</h4>
+    var arr1 = [1,2,3,4,5,6];
+    //push()方法可以接收任意数量的参数，添加在末尾，并返回修改后的数组长度
+    var count = arr1.push("qq","ww");
+    console.log(count);   //8
+    console.log(arr1);    //[1, 2, 3, 4, 5, 6, "qq", "ww"]
+
+    <h4>pop()</h4>
+    //pop()从数组末尾删除追后一项，返回删除的数组
+    var item = arr1.pop();
+    console.log(item); //ww
+    console.log(arr1); //[1, 2, 3, 4, 5, 6, "qq"]
+<h3>队列方法</h3>
+    <h4>shift()</h4>
+    //shift()从数组开始删除第一项，返回删除的数组
+    var afterS = arr1.shift();
+    console.log(afterS) //1
+    console.log(arr1);  //[2, 3, 4, 5, 6, "qq"]
+
+    <h4>unshift()</h4>
+    //unshift()从数组开始推入参数，返回新的数组长度
+    var afterP = arr1.unshift("aa","ss","ff");
+    console.log(afterP) //1
+    console.log(arr1);  //["aa", "ss", "ff", 2, 3, 4, 5, 6, "qq"]
+
+<h3>数组的操作</h3>
+    <h4>concat()</h4>
+    //concat合并数组
+    var color = ["red", "blue"];
+    var color1 = color.concat("yellow",["green", "skyblue"]);
+    console.log(color); //["red", "blue"]
+    console.log(color1); //["red", "blue", "yellow", "green", "skyblue"]
+
+    <h4>slice(start, end)</h4>
+    //slice(start, end) 得到新数组
+    var color = ["red", "blue", "yellow", "green", "skyblue"];
+    var color1 = color.slice(2);  //从下标为2开始，一直截取到最后
+    var color2 = color.slice(2,3); //从下标为2开始截取到下标为三结束，不包括下标为3
+    var color3 = color.slice(-3);  //从末尾第3个截取到最后
+    var color4 = color.slice(-5, -3);  //从末尾第5个截取到第3个，不包括第3个
+    console.log(color1);  // ["yellow", "green", "skyblue"]
+    console.log(color2);  //["yellow"]
+    console.log(color3);  //["yellow", "green", "skyblue"]
+    console.log(color4);  //["red", "blue"]
+
+    <h4>splice()</h4>
+    //splice()
+    var arr = [1,2,3,4];
+
+    var arr1 = arr.splice(0,2); //两个参数删除项,返回删除的项
+    console.log(arr);   //[3, 4]
+    console.log(arr1);  //[1, 2]
+
+    var arr2 = arr.splice(2,0,"red","green"); //插入项，返回空数组
+    console.log(arr);   //[3, 4, "red", "green"]
+    console.log(arr2);  //[]
+
+    var arr3 = arr.splice(2,1,"*****","&&&&&"); //替换项，返回替换的项
+    console.log(arr);   //[3, 4, "*****", "&&&&&", "green"]
+    console.log(arr3);  //["red"]
+
+<h3>数组的位置</h3>
+    <h4>indexOf()</h4>
+    var arr = [2,3,4,5,6,7,78];
+
+    console.log(arr.indexOf(1));  //-1   没有此项返回-1
+    console.log(arr.indexOf(4));  //2    有返回此项的下标
+
+<h3>数组的迭代方法</h3>
+    <h4>filter()</h4>
+    var arr = [1,2,3,4,5,6,7,0];
+    //filter()
+    var filterResult = arr.filter(function(item, index, arr) {
+        return (item > 4);
+    });
+    console.log(filterResult);  //[5, 6, 7]
+
+    <h4>map()</h4>
+    var arr = [1,2,3,4,5,6,7,0];
+    //map()
+    var mapResult = arr.map(function(item, index, arr) {
+        return item * 2;
+    });
+    console.log(mapResult);  //[2, 4, 6, 8, 10, 12, 14, 0]
+
+    <h4>forEach()</h4>
+    var arr = [1,2,3,4,5,6,7,0];
+    //forEach()
+    arr.forEach(function(item, index, arr) {
+        return item - 1;
+    });
+    console.log(arr);  //[1, 2, 3, 4, 5, 6, 7, 0]
+
+    //ES6新增
+    <h4>reduce()</h4>
+    var arr = [1,2,3,4,5,6,7];
+    //reduce()  迭代所有的项，构建一个最终值返回，从第一项开始
+    var sum = arr.reduce(function(prev, cur, index, arr) {
+       return prev + cur
+    })
+    console.log(sum); //28
+
+    <h4>reduceRight()</h4>
+    var arr1 = [1,2,3,4,5,6,7];
+    //reduceRight()  迭代所有的项，构建一个最终值返回，从第最后一项开始
+    var sum1 = arr1.reduceRight(function(prev, cur, index, arr) {
+       return prev - cur
+    })
+    console.log(sum1); //-14
+        </pre>
+    </code>
+    </div>
+    <script type="text/javascript">
+         // var arr = [1,2,3,4];
+
+         // //将数组转为字符串
+         // console.log(arr.join(","));         //1,2,3,4
+         // console.log(arr.toString());        //1,2,3,4
+         // console.log(arr.toLocaleString());  //1,2,3,4
+
+
+         // var arr1 = [1,2,3,4,5,6];
+
+         // //push()方法可以接收任意数量的参数，添加在末尾，并返回修改后的数组长度
+         // var count = arr1.push("qq","ww");
+         // console.log(count);   //8
+         // console.log(arr1);    //[1, 2, 3, 4, 5, 6, "qq", "ww"]
+
+         // //pop()从数组末尾删除追后一项，返回删除的数组
+         // var item = arr1.pop();
+         // console.log(item); //ww
+         // console.log(arr1); //[1, 2, 3, 4, 5, 6, "qq"]
+
+         // //shift()从数组开始删除第一项，返回删除的数组
+         // var afterS = arr1.shift();
+         // console.log(afterS) //1
+         // console.log(arr1);  //[2, 3, 4, 5, 6, "qq"]
+
+         // //unshift()从数组开始推入参数，返回新的数组长度
+         // var afterP = arr1.unshift("aa","ss","ff");
+         // console.log(afterP) //1
+         // console.log(arr1);  //["aa", "ss", "ff", 2, 3, 4, 5, 6, "qq"]
+
+         //数组的操作
+         //concat合并数组
+         // var color = ["red", "blue"];
+         // var color1 = color.concat("yellow",["green", "skyblue"]);
+         // console.log(color); //["red", "blue"]
+         // console.log(color1); //["red", "blue", "yellow", "green", "skyblue"]
+
+         // //slice(start, end)
+         // var color = ["red", "blue", "yellow", "green", "skyblue"];
+         // var color1 = color.slice(2);  //从下标为2开始，一直截取到最后
+         // var color2 = color.slice(2,3); //从下标为2开始截取到下标为三结束，不包括下标为3
+         // var color3 = color.slice(-3);  //从末尾第3个截取到最后
+         // var color4 = color.slice(-5, -3);  //从末尾第5个截取到第3个，不包括第3个
+         // console.log(color1);  // ["yellow", "green", "skyblue"]
+         // console.log(color2);  //["yellow"]
+         // console.log(color3);  //["yellow", "green", "skyblue"]
+         // console.log(color4);  //["red", "blue"]
+
+
+         // //splice()
+         // var arr = [1,2,3,4];
+
+         // var arr1 = arr.splice(0,2); //两个参数删除项,返回删除的项
+         // console.log(arr);   //[3, 4]
+         // console.log(arr1);  //[1, 2]
+
+         // var arr2 = arr.splice(2,0,"red","green"); //插入项，返回空数组
+         // console.log(arr);   //[3, 4, "red", "green"]
+         // console.log(arr2);  //[]
+
+         // var arr3 = arr.splice(2,1,"*****","&&&&&"); //替换项，返回替换的项
+         // console.log(arr);   //[3, 4, "*****", "&&&&&", "green"]
+         // console.log(arr3);  //["red"]
+
+         // var arr = [2,3,4,5,6,7,78];
+
+         // console.log(arr.indexOf(1));  //-1   没有此项返回-1
+         // console.log(arr.indexOf(4));  //2    有返回此项的下标
+
+         // var arr = [1,2,3,4,5,6,7,0];
+         // //filter()
+         // var filterResult = arr.filter(function(item, index, arr) {
+         //     return (item > 4);
+         // });
+         // console.log(filterResult);  //[5, 6, 7]
+         //
+         // var arr = [1,2,3,4,5,6,7,0];
+         // //map()
+         // var mapResult = arr.map(function(item, index, arr) {
+         //     return item * 2;
+         // });
+         // console.log(mapResult);  //[2, 4, 6, 8, 10, 12, 14, 0]
+         //
+         // var arr = [1,2,3,4,5,6,7,0];
+         // //forEach()
+         // arr.forEach(function(item, index, arr) {
+         //     return item - 1;
+         // });
+         // console.log(arr);  //[1, 2, 3, 4, 5, 6, 7, 0]
+         //
+         // var arr = [1,2,3,4,5,6,7];
+         // //reduce()  迭代所有的项，构建一个最终值返回，从第一项开始
+         // var sum = arr.reduce(function(prev, cur, index, arr) {
+         //    return prev + cur
+         // })
+         // console.log(sum); //28
+
+         // var arr1 = [1,2,3,4,5,6,7];
+         // //reduce()  迭代所有的项，构建一个最终值返回，从第最后一项开始
+         // var sum1 = arr1.reduceRight(function(prev, cur, index, arr) {
+         //    return prev - cur
+         // })
+         // console.log(sum1); //-14
+    </script>
+</body>
+</html>
