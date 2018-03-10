@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div id="carousel" class="carousel">
+        <!-- <div class="desc">
+            <a href="javascript:;">
+                <h3 class="title">
+                    小学生异地转学籍需要什么手续？
+                </h3>
+                <div class="desc-text">
+                     小学生异地转学籍需要什么手续？
+                </div>
+                <div class="author">
+                    <img src="images/aa.png" alt="">
+                    <span>AAAA</span>
+                </div>
+            </a>
+        </div> -->
+        <!-- <ul class="lists">
+            <li class="item-cur"><div></div></li>
+            <li class="item-first"><div></div></li>
+            <li class="item-second"><div></div></li>
+            <li class="item-normal"><div></div></li>
+            <li class="item-normal"><div></div></li>
+        </ul> -->
+        <!-- <div class="bar">
+            <span class="bar-avtive"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div> -->
+        <!-- <div class="prev"></div>
+        <div class="next"></div> -->
+    </div>
+    
+    <script src="http://apps.bdimg.com/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script>
+    // https://zhidao.baidu.com/special/column?fr=daohang
+    var picArr = [
+        {
+            "picUrl": "images/banner01.jpg",
+            "text": "01，测试文本测试文本测试文本！",
+            "author": "LIAKI",
+            "authorUrl": "images/aa.png"
+        },
+        {
+            "picUrl": "images/banner02.jpg",
+            "text": "02，测试文本测试文本测试文本！",
+            "author": "LIAKI",
+            "authorUrl": "images/aa.png"
+        },
+        {
+            "picUrl": "images/banner03.jpg",
+            "text": "03，测试文本测试文本测试文本！",
+            "author": "LIAKI",
+            "authorUrl": "images/aa.png"
+        },
+        {
+            "picUrl": "images/banner04.jpg",
+            "text": "04，测试文本测试文本测试文本！",
+            "author": "LIAKI",
+            "authorUrl": "images/aa.png"
+        },
+        {
+            "picUrl": "images/banner05.jpg",
+            "text": "05，测试文本测试文本测试文本！",
+            "author": "LIAKI",
+            "authorUrl": "images/aa.png"
+        }
+    ]
+    function Carousel(obj) {
+        this.$root = $("#carousel")
+        this.$desc = null
+        this.$lists = null
+        this.$bar = null
+        this.$prev = null
+        this.$next = null
+        this.liClassArr = ["item-cur", "item-first", "item-second"]
+        this.initDom(obj.picArr)
+        this.initLiClassArr(obj.picArr)
+        this.initListsDom()
+        this.initEvent()
+    }
+    Carousel.prototype.initDom = function (data) {  
+        let $author = $('<div class="author"><img src='+data[0].authorUrl+' alt =""><span>'+data[0].author+'</span><div>')
+        let $text = $('<div class="desc-text">' + data[0].text +'</div>')
+        let $title = $('<h3 class="title">' + data[0].text +'</h3>')
+        let $herfE = $('<a href="javascript:;"></a>')
+        let $desc = $('<div class="desc"></div>')
+        $herfE.append($title, $text, $author);
+        $desc.append($herfE)
+        this.$lists = $('<ul></ul>').addClass("lists")
+        this.$bar = $('<div></div>').addClass("bar")
+        for (let i = 0; i < data.length; i++) {
+            let spanE = null
+            let liE = $('<li><div style="background-image:url('+data[i].picUrl+')"></div></li>')
+            if (i == 0) {
+                spanE = $("<span class='bar-avtive'></span>")
+            }else{
+                spanE = $("<span></span>")
+            }
+            this.$lists.append(liE)
+            this.$bar.append(spanE)
+        }
+        this.$prev = $('<div class="prev"></div>')
+        this.$next = $('<div class="next"></div>')
+        this.$root.append($desc, this.$lists, this.$bar, this.$prev, this.$next);
+        for (let i = 0; i < data.length; i++) {
+            var eLi = $("<li><div style='background-image:url("+data[i]+")'></div><li>")
+        }
+    }
+    Carousel.prototype.initLiClassArr = function (data) {
+        for (let i = 0; i < data.length; i++) {
+            if (i > 2) {
+                this.liClassArr.push("item-normal")
+            }
+        }
+    }
+    Carousel.prototype.initListsDom = function() {
+        let lisArr = this.$lists.find("li")
+        for (let i = 0; i < lisArr.length; i++) {
+            $(lisArr[i]).addClass(this.liClassArr[i])
+        }
+    }
+    Carousel.prototype.initEvent = function() {
+        this.$next.click(function () { 
+            
+        });
+    }
+
+ 
+    var carousel = new Carousel({
+        picArr
+    })
+    
+    </script>
+</body>
+</html>
