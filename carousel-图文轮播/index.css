@@ -44,13 +44,14 @@
     bottom: 40px;
     left: 0;
 }
-.carousel .desc a .author img, .carousel .desc a .author span{
+.carousel .desc a .author div, .carousel .desc a .author span{
     float: left;
 }
-.carousel .desc a .author img{
+.carousel .desc a .author div{
     width: 32px;
     height: 32px;
     border-radius: 50%;
+    background-size: 100%;
 }
 .carousel .desc a .author span{
     font-size: 14px;
@@ -129,6 +130,7 @@
     background-size: 60px;
     transform: translate(-50%, 0);
     cursor:  pointer;
+    z-index: 99;
 }
 .carousel .prev{
     background-image: url("images/prev.png");
