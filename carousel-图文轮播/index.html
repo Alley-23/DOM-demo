@@ -10,207 +10,271 @@
 </head>
 <body>
     <div id="carousel" class="carousel">
-        <!-- <div class="desc">
+        <!--  ******   DOM结构   ****
+             
+        <div class="desc">
             <a href="javascript:;">
                 <h3 class="title">
                     小学生异地转学籍需要什么手续？
                 </h3>
                 <div class="desc-text">
-                     小学生异地转学籍需要什么手续？
+                        小学生异地转学籍需要什么手续？
                 </div>
                 <div class="author">
                     <div></div>
                     <span>AAAA</span>
                 </div>
             </a>
-        </div> -->
-        <!-- <ul class="lists">
+        </div>
+        <ul class="lists">
             <li class="item-cur"><div></div></li>
             <li class="item-first"><div></div></li>
             <li class="item-second"><div></div></li>
             <li class="item-normal"><div></div></li>
             <li class="item-normal"><div></div></li>
-        </ul> -->
-        <!-- <div class="bar">
+        </ul> 
+        <div class="bar">
             <span class="bar-avtive"></span>
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-        </div> -->
-        <!-- <div class="prev"></div>
+        </div>
+        <div class="prev"></div>
         <div class="next"></div> -->
     </div>
     
     <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js"></script>
     <script>
-    // https://zhidao.baidu.com/special/column?fr=daohang
-    var data = [
-        {
-            "picUrl": "images/banner01.jpg",
-            "text": "01，测试文本测试文本测试文本！",
-            "author": "LIAKI01",
-            "authorUrl": "images/a03.png"
-        },
-        {
-            "picUrl": "images/banner02.jpg",
-            "text": "02，测试文本测试文本测试文本！",
-            "author": "LIAKI02",
-            "authorUrl": "images/a01.png"
-        },
-        {
-            "picUrl": "images/banner03.jpg",
-            "text": "03，测试文本测试文本测试文本！",
-            "author": "LIAKI03",
-            "authorUrl": "images/a02.png"
-        },
-        {
-            "picUrl": "images/banner04.jpg",
-            "text": "04，测试文本测试文本测试文本！",
-            "author": "LIAKI04",
-            "authorUrl": "images/a03.png"
-        },
-        {
-            "picUrl": "images/banner05.jpg",
-            "text": "05，测试文本测试文本测试文本！",
-            "author": "LIAKI05",
-            "authorUrl": "images/a02.png"
+        function Carousel(obj) {
+            this.$root = $("#carousel")
+            this.$desc = null
+            this.$lists = null
+            this.$bar = null
+            this.$prev = null
+            this.$next = null
+            this.timers = null
+            this.barIndex = 0
+            this.liClassArr = ["item-cur", "item-first", "item-second"]
+            this.dataArr = obj.data
+            this.changeTime = obj.changeTime
+            this.initDom(this.dataArr)
+            this.initLiClassArr(this.dataArr)
+            this.initEvent()
+            this.initStatus()
         }
-    ]
-    function Carousel(obj) {
-        this.$root = $("#carousel")
-        this.$desc = null
-        this.$lists = null
-        this.$bar = null
-        this.$prev = null
-        this.$next = null
-        this.timers = null
-        this.barIndex = 0
-        this.descIndex = 0
-        this.liClassArr = ["item-cur", "item-first", "item-second"]
-        this.dataArr = obj.data
-        this.initDom(this.dataArr)
-        this.initLiClassArr(this.dataArr)
-        this.initEvent()
-        this.initStatus()
-    }
-    Carousel.prototype.initDescDom = function(data, num) {
-        //先移除原来的DOM，防止DOM堆积
-        $(".desc").remove()
-        let $desc = $('<div class="desc"></div>')
-        let $author = $('<div class="author"><div>')
-        $author.append('<div style="background-image:url(' + data[num].authorUrl +')"></div>')
-        $author.append('<span>' + data[num].author + '</span>')
-        let $text = $('<div class="desc-text">' + data[num].text + '</div>')
-        let $title = $('<h3 class="title">' + data[num].text + '</h3>')
-        let $herfE = $('<a href="javascript:;"></a>')
         
-        $herfE.append($title, $text, $author);
-        this.$root.append($desc.append($herfE))
-    }
-    Carousel.prototype.initDom = function (data) {  
-        this.$lists = $('<ul></ul>').addClass("lists")
-        this.$bar = $('<div></div>').addClass("bar")
-        for (let i = 0; i < data.length; i++) {
-            let spanE = $("<span data-num="+i+"></span>")
-            let liE = $('<li data-num='+i+'><div style="background-image:url('+data[i].picUrl+')"></div></li>')
-            this.$lists.append(liE)
-            this.$bar.append(spanE)
+        Carousel.prototype.initDom = function (data) {  
+            this.$lists = $('<ul></ul>').addClass("lists")
+            this.$bar = $('<div></div>').addClass("bar")
+            for (let i = 0; i < data.length; i++) {
+                let spanE = $("<span data-num="+i+"></span>")
+                let liE = $('<li data-num='+i+'><div style="background-image:url('+data[i].picUrl+')"></div></li>')
+                this.$lists.append(liE)
+                this.$bar.append(spanE)
+            }
+            this.initDescDom(data)
+            this.$prev = $('<div class="prev"></div>').hide()
+            this.$next = $('<div class="next"></div>').hide()
+            this.$root.append(this.$lists, this.$bar, this.$prev, this.$next);
         }
-        this.initDescDom(data, this.descIndex)
-        this.$prev = $('<div class="prev"></div>').hide()
-        this.$next = $('<div class="next"></div>').hide()
-        this.$root.append(this.$lists, this.$bar, this.$prev, this.$next);
-    }
-    //初始化轮播图的类名数组
-    Carousel.prototype.initLiClassArr = function (data) {
-        for (let i = 0; i < data.length; i++) {
-            if (i > 2) {
-                this.liClassArr.push("item-normal")
+
+        Carousel.prototype.initDescDom = function(data) {
+            let _index = this.barIndex
+            //先移除原来的DOM，防止DOM堆积
+            $(".desc").remove()
+            let $desc = $('<div class="desc"></div>')
+            let $author = $('<div class="author"><div>')
+            $author.append('<div style="background-image:url(' + data[_index].authorUrl +')"></div>')
+            $author.append('<span>' + data[_index].author + '</span>')
+            let $text = $('<div class="desc-text">' + data[_index].text + '</div>')
+            let $title = $('<h3 class="title">' + data[_index].text + '</h3>')
+            let $herfE = $('<a href="javascript:;"></a>')
+            
+            $herfE.append($title, $text, $author);
+            this.$root.append($desc.append($herfE))
+        }
+
+        //初始化轮播图的类名数组
+        Carousel.prototype.initLiClassArr = function (data) {
+            //判断传进来的数据长度，处理类名数组
+            let getDataLength = this.liClassArr.length - data.length
+            if(getDataLength > 0){
+                for (let i = 0; i < Math.abs(getDataLength); i++) {
+                    this.liClassArr.pop()
+                }
+                console.log( this.liClassArr);
+                
+            }else{
+                for (let i = 0; i < data.length; i++) {
+                    if (i > 2) {
+                        this.liClassArr.push("item-normal")
+                    }
+                }
+            }
+            this.initListsClass(this.liClassArr)
+            this.barAvtive()
+        }
+        //初始化轮播图的class
+        Carousel.prototype.initListsClass = function(arr) {
+            let lisArr = this.$lists.find("li")
+            for (let i = 0; i < lisArr.length; i++) {
+                $(lisArr[i]).removeClass().addClass(arr[i]+" addMask")
             }
         }
-        this.initListsClass(this.liClassArr)
-        this.barAvtive(this.barIndex)
-    }
-    //初始化轮播图的class
-    Carousel.prototype.initListsClass = function(arr) {
-        let lisArr = this.$lists.find("li")
-        for (let i = 0; i < lisArr.length; i++) {
-            $(lisArr[i]).removeClass().addClass(arr[i])
+        //选中的bar和图片的设置
+        Carousel.prototype.barAvtive = function () {
+            this.$bar.find("span").each((index, item) => {
+                $(item).removeClass()
+                if (this.barIndex == index) {
+                    $(item).addClass("bar-avtive")
+                }
+            })
+            this.$lists.find("li").each((index, item) => {
+                if (this.barIndex == index) {
+                    $(item).removeClass("addMask")
+                }
+            })
         }
-    }
-    //选中的bar
-    Carousel.prototype.barAvtive = function (num) {
-        this.$bar.find("span").each((index, item) => {
-            $(item).removeClass()
-            if (num == index) {
-                $(item).addClass("bar-avtive")
+        Carousel.prototype.initEvent = function() {
+            let _this = this
+            //下一个
+            _this.$next.on("click", function() {
+                _this.nextBtn()
+            })
+            //上一个
+            _this.$prev.on("click", function(){
+                _this.prevBtn()
+            })
+            //鼠标移入清除定时器和显示切换图标
+            _this.$root.on("mousemove", function() {
+                clearInterval(_this.timers)
+                _this.$prev.show()
+                _this.$next.show()
+            })
+            //鼠标移出开启定时器和隐藏切换图标
+            _this.$root.on("mouseleave", function() {
+                _this.initStatus()
+                _this.$prev.hide()
+                _this.$next.hide()
+            })
+            //点击图片切换
+            _this.$lists.find("li").on("click", function() {
+                //需传递点击元素的this
+                _this.getNewData($(this))
+            })
+            //鼠标hover圆点切换图片
+            _this.$bar.find("span").hover(function () {
+                _this.getNewData($(this))
+            })
+        }
+
+        //下一张
+        Carousel.prototype.nextBtn = function() {
+            let _this = this
+            _this.barIndex++
+            if (_this.barIndex >= _this.liClassArr.length) {
+                _this.barIndex = 0
             }
-        })
-    }
-    Carousel.prototype.initEvent = function() {
-        let _this = this
-        //下一个
-        _this.$next.on("click", function() {
-            _this.nextBtn()
-        })
-        //上一个
-        _this.$prev.on("click", function(){
-            _this.prevBtn()
-        })
-        _this.$root.on("mousemove", function() {
-            clearInterval(_this.timers)
-            _this.$prev.show()
-            _this.$next.show()
-        })
-        _this.$root.on("mouseleave", function() {
-            _this.initStatus()
-            _this.$prev.hide()
-            _this.$next.hide()
-        })
-    }
-    Carousel.prototype.nextBtn = function() {
-        let _this = this
-        _this.barIndex++
-        if (_this.barIndex >= _this.liClassArr.length) {
-            _this.barIndex = 0
+            let getNextData =  _this.liClassArr.slice(-1)
+            let getPrevData =  _this.liClassArr.slice(0, _this.liClassArr.length - 1)
+            _this.liClassArr = getNextData.concat(getPrevData)
+            _this.setChange()
         }
-        let last =  _this.liClassArr.slice(-1)
-        let head =  _this.liClassArr.slice(0, _this.liClassArr.length - 1)
-        _this.liClassArr = last.concat(head)
-        _this.setChange(_this.liClassArr)
-    }
-    Carousel.prototype.prevBtn = function() {
-        let _this = this
-        _this.barIndex--
-        if (_this.barIndex < 0) {
-            _this.barIndex = _this.liClassArr.length - 1
+        //上一张
+        Carousel.prototype.prevBtn = function() {
+            let _this = this
+            _this.barIndex--
+            if (_this.barIndex < 0) {
+                _this.barIndex = _this.liClassArr.length - 1
+            }
+            let getNextData = _this.liClassArr.slice(0,1)
+            let getPrevData = _this.liClassArr.slice(1)
+            _this.liClassArr = getPrevData.concat(getNextData)
+            _this.setChange()
         }
-        let last = _this.liClassArr.slice(0,1)
-        let head = _this.liClassArr.slice(1)
-        _this.liClassArr = head.concat(last)
-        _this.setChange(_this.liClassArr)
-    }
 
-    Carousel.prototype.setChange = function(arr) {
-        let _this = this
-        _this.initListsClass(arr)
-        _this.barAvtive(_this.barIndex)
-        _this.initDescDom(_this.dataArr, _this.barIndex)
-    }
+        Carousel.prototype.setChange = function() {
+            let _this = this
+            _this.initListsClass(_this.liClassArr)
+            _this.barAvtive(_this.barIndex)
+            _this.initDescDom(_this.dataArr, _this.barIndex)
+        }
 
-    Carousel.prototype.initStatus = function () {
-        let _this = this
-        this.timers = setInterval(() => {
-            _this.nextBtn()
-        }, 1000);
-    }
+        Carousel.prototype.initStatus = function () {
+            let _this = this
+            this.timers = setInterval(() => {
+                _this.nextBtn()
+            }, _this.changeTime);
+        }
+        Carousel.prototype.getNewData = function(getThis) {
+            let _this = this
+            //获取当前index
+            let getIndex = getThis.data("num")
+            //计算差值
+            let getNum = Math.abs(getIndex - _this.barIndex)
+            //重新计算数组顺序
+            if (getIndex > _this.barIndex) {
+                for (let i = 0; i < getNum; i++) {
+                    let popEle = _this.liClassArr.pop()
+                    _this.liClassArr.unshift(popEle)
+                }
+            }
+            if (getIndex < _this.barIndex) {
+                for (let i = 0; i < getNum; i++) {
+                    let popEle = _this.liClassArr.shift()
+                    _this.liClassArr.push(popEle)
+                }
+            }
+            //改变原来的index，不然还会跳回原来状态
+            _this.barIndex = getIndex
+            _this.setChange()
+        }
+        
 
 
- 
-    var carousel = new Carousel({
-        data
-    })
+        /*
+        创建方法： new一个Carousel实例
+        传值： { data: arr , changeTime: num}
+        */
+
+        var data = [
+                {
+                    "picUrl": "images/banner01.jpg",
+                    "text": "01，测试文本测试文本测试文本！",
+                    "author": "LIAKI01",
+                    "authorUrl": "images/a01.png"
+                },
+                {
+                    "picUrl": "images/banner02.jpg",
+                    "text": "02，测试文本测试文本测试文本！",
+                    "author": "LIAKI02",
+                    "authorUrl": "images/a02.png"
+                },
+                {
+                    "picUrl": "images/banner03.jpg",
+                    "text": "03，测试文本测试文本测试文本！",
+                    "author": "LIAKI03",
+                    "authorUrl": "images/a03.png"
+                },
+                {
+                    "picUrl": "images/banner04.jpg",
+                    "text": "04，测试文本测试文本测试文本！",
+                    "author": "LIAKI04",
+                    "authorUrl": "images/a01.png"
+                },
+                {
+                    "picUrl": "images/banner05.jpg",
+                    "text": "05，测试文本测试文本测试文本！",
+                    "author": "LIAKI05",
+                    "authorUrl": "images/a02.png"
+                } 
+            ]
+        
+        var carousel = new Carousel({
+            data,
+            changeTime: 4000
+        })
     
     </script>
 </body>
