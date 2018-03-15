@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>为圆选坑</title>
+    <link rel="stylesheet" href="css/base.css">
+    <style>
+        .root{
+            /* height: 100px; */
+            background-color: #eee;
+            position: relative;
+            margin-top: 20px;
+        }
+        .root .item{
+            background-color: #ccc;
+            float: left;
+            border-radius: 50%;
+        }
+        .root .mask{
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            -webkit-transition:all 0.5s ease;
+            -moz-transition:all 0.5s ease;
+            -o-transition:all 0.5s ease;
+            -ms-transition:all 0.5s ease;
+            transition:all 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div id="root" class="root clearfix">
+        <div class="mask"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div> -->
+
+
+    <script>
+        function ChangeItem(data) {
+            this.root = null;
+            this.removeEle = null;
+            this.initIndex = 0;
+            this.num = data.num;
+            this.diameter = data.diameter
+            this.bgcolor = data.bgcolor
+            this.initDom();  //初始化DOM
+            this.btnEvent(); //事件函数
+        }
+        ChangeItem.prototype = {
+            //初始化DOM
+            initDom: function () {
+                //生成root元素
+                this.root = document.createElement("div");
+                //添加样式和类名
+                this.root.className = "root clearfix"
+                this.root.style.width = this.num * this.diameter 
+                + "px"
+                document.body.appendChild(this.root);
+                //根据传进来的长度生成列表元素
+                for (let i = 0; i < this.num; i++) {
+                    let item = document.createElement("div");
+                    item.className = "item"
+                    item.style.width = this.diameter + "px"
+                    item.style.height = this.diameter + "px"
+                    this.root.appendChild(item)
+                }
+                //添加mask元素
+                this.removeEle = document.createElement("div");
+                this.removeEle.className = "mask"
+                this.removeEle.style.width = this.diameter + "px"
+                this.removeEle.style.height = this.diameter + "px"
+                this.removeEle.style.backgroundColor = this.bgcolor
+                this.root.appendChild(this.removeEle)
+            },
+            //事件函数
+            btnEvent: function () {
+                //备份this
+                var _this = this; 
+                //root点击逻辑
+                this.root.onclick  = function () {
+                    _this.initIndex ++;
+                    if (_this.initIndex >= _this.num) {
+                        _this.initIndex = 0
+                    }
+                    //对mask元素位置做处理
+                    _this.removeEle.style.left = _this.diameter * _this.initIndex + "px"
+                }
+            }
+        }
+        //参数可以自行配置,实例化两个对象
+        new ChangeItem(
+            {
+                "diameter" : 50,
+                "num" : 3,
+                "bgcolor" : "#2196f3"
+            }
+        )
+        new ChangeItem(
+            {
+                "diameter": 100,
+                "num": 5,
+                "bgcolor": "#ff9800"
+            }
+        )
+
+        new ChangeItem(
+            {
+                "diameter": 10,
+                "num": 6,
+                "bgcolor": "#2196f3"
+            }
+        )
+        //循环生成多个实例
+        for (let i = 0; i < 8; i++) {
+            new ChangeItem(
+                {
+                    "diameter": 100,
+                    "num": 5,
+                    "bgcolor": "#ff9800"
+                }
+            ) 
+        }
+    </script>
+</body>
+</html>
