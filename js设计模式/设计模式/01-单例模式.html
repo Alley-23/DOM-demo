@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .close, .logBtn{
+            width: 80px;
+            height: 30px;
+            border-radius: 5px;
+            color: #fff;
+            line-height: 30px;
+            text-align: center;
+        }
+        .close{
+            background-color: red;
+        }
+        .logBtn{
+            background-color: rgb(72, 177, 98);
+        }
+        .logBtn:hover{
+            background-color: rgb(79, 206, 111);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="login" class="logBtn">登陆</div>
+
+    <script>
+        //会创建多个
+        /*
+        var createLoginLayer = function(){
+            var div = document.createElement("div");
+            div.innerHTML = "hello";
+            div.style.display = "none";
+            document.body.appendChild(div);
+            return div
+        }
+        */
+        var isLogin = true
+        var createLoginLayer = (function(){
+            var div;
+            return function() {
+                if (!div) {
+                    div = document.createElement("div");
+                    div.innerHTML = "hello";
+                    div.style.display = "none";
+                    document.body.appendChild(div);
+                }
+                return div
+            }
+        })()
+        var oBtn = document.getElementById("login")
+        oBtn.onclick = function() {
+            var loginLayer = createLoginLayer();
+            isLogin = !isLogin
+            if (!isLogin) {
+                oBtn.innerHTML = "关闭"
+                oBtn.className = "close"
+                loginLayer.style.display = "block";
+            }else{
+                oBtn.innerHTML = "登陆"
+                oBtn.className = "logBtn"
+                loginLayer.style.display = "none";
+            }
+            
+            
+        }
+        
+    </script>
+</body>
+</html>
