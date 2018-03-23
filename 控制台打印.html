@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>console</title>
+    <style>
+        a{
+            display: block;
+            width: 220px;
+            text-align: center;
+            color: rgb(212, 0, 195);
+            text-decoration: none;
+            font-size: 40px;
+            font-weight: bold;
+            padding: 20px;
+            background-color: #e9f5ff;
+            box-shadow:0px 9px 10px -7px #d1d8e4;
+            margin: 50px;
+        }
+        .tip{
+            font-size: 28px;
+            color: coral;
+            margin: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+         在 Web控制台上创建一个新的分组.随后输出到控制台上的内容都会被添加一个缩进,表示该内容属于当前分组,直到调用console.groupEnd() 之后
+    </div>
+    <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Console/groupCollapsed">MDN API</a>
+
+    <div class="tip">
+        查看请打开控制台
+    </div>
+    <script>
+        console.groupCollapsed('这里是外面');
+            console.log('这里是里面');
+            console.log('这里swe面');
+            console.log('sdw');
+        console.groupEnd();
+    </script>
+    
+    
+</body>
+</html>
