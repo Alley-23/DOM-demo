@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        p{
+            line-height: 30px;
+        }
+        .top{
+           padding-left: 30px;
+        }
+        ul li{
+            overflow: hidden;
+            padding: 30px;
+        }
+        .testBox{
+            width: 200px;
+            height: 150px;
+            background-color: #eee;  
+            margin-right: 30px;
+            margin-bottom: 30px;
+            float: left;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #666;
+            padding: 5px 20px 0px 20px;
+        }
+        .shadow-type{
+            font-size: 18px;
+            color: #333;
+            border-bottom: 1px dashed #333;
+        }
+        .shadow-code{
+            margin-top: 10px;
+            line-height: 20px;
+            font-size: 14px;
+            color: orchid;
+        }
+        /* 单侧 */
+        .one-side{
+            box-shadow: 0px 5px 10px -5px blueviolet;
+        }
+        .one-side2{
+            box-shadow: 5px 0px 10px -5px blueviolet;
+        }
+        .one-side3{
+            box-shadow: -5px 0px 10px -5px blueviolet;
+        }
+        .one-side4{
+            box-shadow: 0px -5px 10px -5px blueviolet;
+        }
+        /* 邻边 */
+        .adjacent-side{
+            box-shadow: 5px 5px 10px -5px blueviolet;
+        }
+        .adjacent-side2{
+            box-shadow: 5px -5px 10px -5px blueviolet;
+        }
+        .adjacent-side3{
+            box-shadow: -5px -5px 10px -5px blueviolet;
+        }
+        .adjacent-side4{
+            box-shadow: -5px 5px 10px -5px blueviolet;
+        }
+        /* 双侧 */
+        .bilateral1{
+            box-shadow: 5px 0 5px -5px blueviolet,
+                        -5px 0 5px -5px blueviolet; 
+        }
+        .bilateral2{
+            box-shadow: 0 5px 5px -5px blueviolet,
+                        0 -5px 5px -5px blueviolet; 
+        }
+    </style>
+</head>
+<body>
+    <div class="">
+        <div class="top">
+            <h2>CSS投影</h3>
+            <div>
+                <p>box-shadow: 右移，下移，模糊，扩张半径，颜色；</p>
+                <p>模糊：使用高斯模糊算法(或类似算法)将它进行4px的模糊处理。这在 本质上表示在阴影边缘发生阴影色和纯透明色之间的颜色过渡长度近似于模 糊半径的两倍(比如在这里是 8px)。</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <h3>单侧投影</h3>
+                <div class="testBox one-side2">
+                    <p class="shadow-type">right</p>
+                    <p class="shadow-code">box-shadow: 5px 0px 10px -5px blueviolet;</p>
+                </div>
+                <div class="testBox one-side3">
+                    <p class="shadow-type">left</p>
+                    <p class="shadow-code">box-shadow: -5px 0px 10px -5px blueviolet;</p>
+                </div>
+                <div class="testBox one-side">
+                    <p class="shadow-type">bottom</p>
+                    <p class="shadow-code">box-shadow: 0px 5px 10px -5px blueviolet;</p>
+                </div>
+                <div class="testBox one-side4">
+                    <p class="shadow-type">top</p>
+                    <p class="shadow-code">box-shadow: -5px 5px 10px -5px blueviolet;</p>
+                </div>
+            </li>
+            <li>
+                <h3>邻边投影</h3>
+                <div class="testBox adjacent-side2">
+                    <p class="shadow-type">right-top</p>
+                    <p class="shadow-code">box-shadow: 5px -5px 10px -5px blueviolet;</p>
+                </div>
+                <div class="testBox adjacent-side">
+                    <p class="shadow-type">right-bottom</p>
+                    <p class="shadow-code">box-shadow: 5px 5px 10px -5px blueviolet;</p>
+                </div>
+                <div class="testBox adjacent-side3">
+                    <p class="shadow-type">left-top</p>
+                    <p class="shadow-code">box-shadow: -5px -5px 10px -5px blueviolet;</p>
+                </div>
+                <div class="testBox adjacent-side4">
+                    <p class="shadow-type">left-bottom</p>
+                    <p class="shadow-code">box-shadow: 0px -5px 10px -5px blueviolet;</p>
+                </div>
+            </li>
+            <li>
+                <h3>双侧投影</h3>
+                <div class="testBox bilateral1">
+                    <p class="shadow-type">left-right</p>
+                    <p class="shadow-code">
+                         box-shadow: 5px 0 5px -5px blueviolet, 
+                                    -5px 0 5px -5px blueviolet;
+                    </p>
+                </div>
+                <div class="testBox bilateral2">
+                    <p class="shadow-type">top-bottom</p>
+                    <p class="shadow-code">box-shadow: 0 5px 5px -5px blueviolet, 0 -5px 5px -5px blueviolet;</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
